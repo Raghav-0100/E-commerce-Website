@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: ecommerce-mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017" # host:container — 27018 to avoid clashing with any local Mongo you already run
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: ecommerce-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      DEV_MODE: development
+      # Points at the local containerized Mongo by default. Swap this for your
+      # Atlas mongodb+srv:// string (see .env) if you want to use your real data.
+      MONGO_URL: mongodb://mongo:27017/Ecommerce-app
+      JWT_SECRET: ${JWT_SECRET}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: ecommerce-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      WDS_SOCKET_PORT: 0
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
+  redis-data:
