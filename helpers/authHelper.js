@@ -1,7 +1,7 @@
 // bcrypt: A library used to hash passwords and compare them for authentication. It adds salt to 
 // the hashing process,making it more secure against dictionary and brute-force attacks.
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const hashPassword = async (password) => {
   try {
