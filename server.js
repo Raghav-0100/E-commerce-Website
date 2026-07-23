@@ -7,7 +7,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import productRoutes from "./routes/productRoutes.js"; // <-- ADD THIS
+import productRoutes from "./routes/productRoutes.js";
 import { connectRedis } from "./config/redisClient.js";
 
 dotenv.config();
@@ -27,13 +27,23 @@ connectRedis();
 
 const app = express();
 
-app.use(cors());
+// CORS Configuration
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://e-commerce-website-6kq2.onrender.com",
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
-app.use("/api/v1/product", productRoutes); // <-- ADD THIS
+app.use("/api/v1/product", productRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to Parking System</h1>");
@@ -45,7 +55,6 @@ const MODE = process.env.NODE_ENV || "development";
 app.listen(PORT, () => {
   console.log(`Server running in ${MODE} mode on port ${PORT}`.bgCyan.white);
 });
-
 
 
 /// without redis 
