@@ -23,7 +23,7 @@ const connectDB = async () => {
 };
 
 connectDB();
-connectRedis();
+//connectRedis();
 
 const app = express();
 
