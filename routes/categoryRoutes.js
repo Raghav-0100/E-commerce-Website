@@ -1,3 +1,8 @@
+router.get("/test", (req, res) => {
+  res.send("Category router works");
+});
+
+
 import express from "express";
 import { isAdmin, requireSignIn } from "./../middlewares/authMiddleware.js";
 import { cacheMiddleware } from "./../middlewares/cacheMiddleware.js";

@@ -7,6 +7,9 @@ import cors from "cors";
 
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+
+console.log("Category Routes Imported:", categoryRoutes);
+
 import productRoutes from "./routes/productRoutes.js";
 import { connectRedis } from "./config/redisClient.js";
 
