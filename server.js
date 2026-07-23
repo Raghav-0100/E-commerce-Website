@@ -60,6 +60,10 @@ app.get("/", (req, res) => {
   res.send("Backend Version 2");
 });
 
+app.get("/hello", (req, res) => {
+  res.send("Hello");
+});
+
 const PORT = process.env.PORT || 8080;
 const MODE = process.env.NODE_ENV || "development";
 
