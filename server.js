@@ -45,8 +45,12 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
+// app.get("/", (req, res) => {
+//   res.send("<h1>Welcome to Parking System</h1>");
+// });
+
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to Parking System</h1>");
+  res.send("Backend Version 2");
 });
 
 const PORT = process.env.PORT || 8080;
