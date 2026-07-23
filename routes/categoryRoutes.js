@@ -1,6 +1,3 @@
-router.get("/test", (req, res) => {
-  res.send("Category router works");
-});
 
 
 import express from "express";
@@ -15,6 +12,11 @@ import {
 } from "./../controllers/categoryController.js";
 
 const router = express.Router();
+
+router.get("/test", (req, res) => {
+  res.send("Category router works");
+});
+
 
 //routes
 // create category
