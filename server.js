@@ -30,12 +30,11 @@ connectDB();
 
 const app = express();
 
-// CORS Configuration
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://e-commerce-website-6kq2.onrender.com",
+      "https://e-commerce-website-loyy.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
